@@ -10,11 +10,11 @@ export function authenticateToken(req: Request, res: Response, next: NextFunctio
         return
     }
 
-    const token = req.cookies.accessToken
+    const accessToken = req.cookies.accessToken
     const refreshToken = req.cookies.refreshToken
 
     try {
-        const payload = jwt.verify(token, JWT_SECRET) as any
+        const payload = jwt.verify(accessToken, JWT_SECRET) as any
         (req as RequestWithMiddleware).user = { id: payload.userId, role: payload.role }
         next()
     } catch (err) {

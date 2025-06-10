@@ -1,6 +1,14 @@
 ### Me
-curl -X GET http://localhost:3000/users/me \
+curl -X GET http://localhost:3000/users \
   --cookie "
-    accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4MmUyMmViZTllYWJmZjMyMGY5NDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0OTU2ODA1NSwiZXhwIjoxNzQ5NTY4MDg1fQ.ooUrE_ZqtrNOG-RJiBtrncaK4sSasZqgqAiKdhEWHKc;
-    refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4MmUyMmViZTllYWJmZjMyMGY5NDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0OTU2OTU1NSwiZXhwIjoxNzQ5NTY5Njc1fQ.RlK2zyncX993AUJ0MvHcka3mbBDehJeKnj2hz7Nxie8;
+    accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4NThhZGQyNGNhN2VmYmM3OTE2YTAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0OTU3ODYzMCwiZXhwIjoxNzQ5NTc5NTMwfQ.g4gFUHsmgVXGNdxCq1PG0l4IkyK7Zu8vcKNLItgaMJw;
+    refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4NThhZGQyNGNhN2VmYmM3OTE2YTAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0OTU3ODYzMCwiZXhwIjoxNzUyMTcwNjMwfQ.rfaHl6dvHwESsE2agfPQlAeOH1wDT7dbLDhz_2YBQyg;
     "
+
+### Delete
+curl -X DELETE http://localhost:3000/users \
+  --cookie "
+    accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4MmUyMmViZTllYWJmZjMyMGY5NDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0OTU3MTY2NCwiZXhwIjoxNzQ5NTcyNTY0fQ.ySgrVkfQw6OM6qdgwLPMCtACaF6i6eJ6gZeu90XDW_U;
+    refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4MmUyMmViZTllYWJmZjMyMGY5NDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0OTU3MTY2NCwiZXhwIjoxNzUyMTYzNjY0fQ.xE0fhxFuGtMGxNNoo-I_Ca1-TIBS2vcZWa7EHMXVSeA
+    "
+

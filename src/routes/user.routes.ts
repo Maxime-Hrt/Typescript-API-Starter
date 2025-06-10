@@ -4,10 +4,7 @@ import * as authMiddleware from "../middlewares/auth.middleware"
 
 const router = Router()
 
-// router.get('/', userController.getUsers)
-router.get('/me', authMiddleware.authenticateToken, userController.getUserById)
-// router.get('/:id', userController.getUserById)
-// router.post('/', userController.createUser)
-// router.delete('/:id', userController.deleteUser)
+router.get('/', authMiddleware.authenticateToken, userController.getUserById)
+router.delete('/', authMiddleware.authenticateToken, userController.deleteUser)
 
 export default router

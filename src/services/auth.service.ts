@@ -1,6 +1,5 @@
 import { connectToDatabase } from "../db/mongo"
 import { User } from "../models/user.model"
-import { ObjectId } from "mongodb"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
