@@ -13,6 +13,13 @@ This is a starter project for a Typescript server using Express. The project is 
 You can configure the server by setting the environment variables in the `.env` file.
 
 ```
+### Server
 PORT=3000
+
+### MongoDB
+MONGO_URI=mongodb://localhost:27017
+MONGO_DB_NAME="starter"
+
+### JWT
 JWT_SECRET=your_secret_key
 ```

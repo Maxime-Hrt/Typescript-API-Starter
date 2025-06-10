@@ -1,12 +1,16 @@
 import express from "express"
 import { connectToDatabase, closeDatabase } from "./db/mongo"
+import cookieParser from 'cookie-parser'
+import authRoutes from './routes/auth.routes'
 import userRouter from "./routes/user.routes"
 
 const app = express()
 const port = process.env.PORT || 3000
 
 app.use(express.json())
+app.use(cookieParser())
 app.use("/users", userRouter)
+app.use('/auth', authRoutes)
 
 connectToDatabase()
     .then(() => {

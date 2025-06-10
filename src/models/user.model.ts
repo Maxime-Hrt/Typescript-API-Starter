@@ -4,5 +4,7 @@ export interface User {
     _id?: ObjectId
     name: string
     email: string
-    age: number    
+    password: string
+    role?: "admin" | "user"
+    age?: number    
 }

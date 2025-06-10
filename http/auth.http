@@ -1,0 +1,16 @@
+### Sign Up
+curl -X POST http://localhost:3000/auth/signup \
+-H "Content-Type: application/json" \
+-d '{
+    "name": "test password",
+    "email": "tester.password@app.com",
+    "password": "12345678"
+}'
+
+### Sign In
+curl -X POST http://localhost:3000/auth/signin \
+-H "Content-Type: application/json" \
+-d '{
+    "email": "tester.password@app.com",
+    "password": "12345678"
+}'

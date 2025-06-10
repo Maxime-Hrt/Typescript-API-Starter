@@ -1,17 +1,6 @@
-### Get all users
-curl -X GET http://localhost:3000/users
-
-### Create a user
-curl -X POST http://localhost:3000/users \
--H "Content-Type: application/json" \
--d '{
-    "name": "Customer Tester",
-    "email": "customer.tester@app.com",
-    "age": 14
-}'
-
-### Get a user by id
-curl -X GET http://localhost:3000/users/684817a14a2bec99170315dd
-
-### Delete a user by id
-curl -X DELETE http://localhost:3000/users/684817a14a2bec99170315dd
+### Me
+curl -X GET http://localhost:3000/users/me \
+  --cookie "
+    accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4MmUyMmViZTllYWJmZjMyMGY5NDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0OTU2ODA1NSwiZXhwIjoxNzQ5NTY4MDg1fQ.ooUrE_ZqtrNOG-RJiBtrncaK4sSasZqgqAiKdhEWHKc;
+    refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4MmUyMmViZTllYWJmZjMyMGY5NDIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0OTU2OTU1NSwiZXhwIjoxNzQ5NTY5Njc1fQ.RlK2zyncX993AUJ0MvHcka3mbBDehJeKnj2hz7Nxie8;
+    "
