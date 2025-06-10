@@ -1,7 +1,7 @@
 ### Me
 curl -X GET http://localhost:3000/users \
   --cookie "
-    accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4NThhZGQyNGNhN2VmYmM3OTE2YTAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0OTU3ODYzMCwiZXhwIjoxNzQ5NTc5NTMwfQ.g4gFUHsmgVXGNdxCq1PG0l4IkyK7Zu8vcKNLItgaMJw;
+    accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4NThhZGQyNGNhN2VmYmM3OTE2YTAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0OTU3OTY5NSwiZXhwIjoxNzQ5NTgwNTk1fQ.TeSIzb2u4QC8wDdgWpz81yPTel1o9rhjmSvAHRFLfWI;
     refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODQ4NThhZGQyNGNhN2VmYmM3OTE2YTAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0OTU3ODYzMCwiZXhwIjoxNzUyMTcwNjMwfQ.rfaHl6dvHwESsE2agfPQlAeOH1wDT7dbLDhz_2YBQyg;
     "
 

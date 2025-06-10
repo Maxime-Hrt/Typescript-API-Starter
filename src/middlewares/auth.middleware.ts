@@ -18,35 +18,61 @@ export function authenticateToken(req: Request, res: Response, next: NextFunctio
         (req as RequestWithMiddleware).user = { id: payload.userId, role: payload.role }
         next()
     } catch (err) {
-        const isExpired = err instanceof jwt.TokenExpiredError
+        // Only proceed with refresh if access token is expired
+        if (!(err instanceof jwt.TokenExpiredError)) {
+            res.status(401).json({ message: "Invalid token" })
+            return
+        }
+
         if (!refreshToken) {
-            res.status(401).json({ message: "Refresh token missing", expired: isExpired })
+            res.status(401).json({ message: "Refresh token missing", expired: true })
             return
         }
 
         try {
-            const payload = jwt.verify(refreshToken, JWT_SECRET) as any
+            // Get expired access token payload without verification
+            const expiredAccessPayload = jwt.decode(accessToken) as any
+            if (!expiredAccessPayload) {
+                res.status(401).json({ message: "Invalid access token" })
+                return
+            }
+
+            const refreshPayload = jwt.verify(refreshToken, JWT_SECRET) as any
+
+            // Verify the user IDs match between tokens
+            if (expiredAccessPayload.userId !== refreshPayload.userId) {
+                res.status(401).json({ message: "Token mismatch" })
+                return
+            }
 
             const newAccessToken = jwt.sign(
-                { userId: payload.userId, role: payload.role },
+                { userId: refreshPayload.userId, role: refreshPayload.role },
                 JWT_SECRET,
                 { expiresIn: '15m' }
             )
 
-            const newRefreshToken = jwt.sign(
-                { userId: payload.userId, role: payload.role },
-                JWT_SECRET,
-                { expiresIn: '30d' }
-            )
+            // Check if refresh token needs to be renewed (less than 7 days until expiration)
+            const refreshTokenExp = (refreshPayload.exp * 1000) - Date.now() // Convert to milliseconds
+            const sevenDays = 7 * 24 * 60 * 60 * 1000
 
-            console.log("Refreshing token...")
+            let newRefreshToken = refreshToken
+            if (refreshTokenExp < sevenDays) {
+                newRefreshToken = jwt.sign(
+                    { userId: refreshPayload.userId, role: refreshPayload.role },
+                    JWT_SECRET,
+                    { expiresIn: '30d' }
+                )
+                console.log("Refreshing both tokens...")
+            } else {
+                console.log("Refreshing only access token...")
+            }
 
             res
                 .cookie('accessToken', newAccessToken, { httpOnly: true, secure: true, maxAge: 15 * 60 * 1000 })
                 .cookie('refreshToken', newRefreshToken, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
 
             // Inject user into request
-            (req as any).user = { id: payload.userId, role: payload.role }
+            (req as RequestWithMiddleware).user = { id: refreshPayload.userId, role: refreshPayload.role }
 
             return next()
 
