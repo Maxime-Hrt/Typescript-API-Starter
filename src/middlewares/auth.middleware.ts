@@ -62,14 +62,14 @@ export function authenticateToken(req: Request, res: Response, next: NextFunctio
                     JWT_SECRET,
                     { expiresIn: '30d' }
                 )
-                console.log("Refreshing both tokens...")
+                console.log(`Refreshing both tokens for ${refreshPayload.userId}...`)
             } else {
-                console.log("Refreshing only access token...")
+                console.log(`Refreshing only access token for ${refreshPayload.userId}...`)
             }
 
             res
-                .cookie('accessToken', newAccessToken, { httpOnly: true, secure: true, maxAge: 15 * 60 * 1000 })
-                .cookie('refreshToken', newRefreshToken, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
+                .cookie('accessToken', newAccessToken, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 15 * 60 * 1000 })
+                .cookie('refreshToken', newRefreshToken, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 30 * 24 * 60 * 60 * 1000 });
 
             // Inject user into request
             (req as RequestWithMiddleware).user = { id: refreshPayload.userId, role: refreshPayload.role }
@@ -77,6 +77,10 @@ export function authenticateToken(req: Request, res: Response, next: NextFunctio
             return next()
 
         } catch (err) {
+            if (err instanceof jwt.JsonWebTokenError) {
+                res.status(401).json({ message: "Refresh token is expired" })
+                return
+            }
             res.sendStatus(403) // Forbidden
             return
         }

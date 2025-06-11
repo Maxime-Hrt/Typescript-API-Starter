@@ -1,7 +1,10 @@
-.env
 node_modules
 .DS_Store
 .vscode
 .cursorrules
 .cursor
 .idea
+*.log
+
+.env
+.env.staging

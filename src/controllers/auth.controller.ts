@@ -13,8 +13,8 @@ export async function signUp(req: Request, res: Response) {
     const { accessToken, refreshToken } = authService.generateTokens(user)
 
     res
-      .cookie('accessToken', accessToken, { httpOnly: true, secure: true, maxAge: 15 * 60 * 1000 }) // 15 minutes
-      .cookie('refreshToken', refreshToken, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 }) // 30 days
+      .cookie('accessToken', accessToken, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 15 * 60 * 1000 }) // 15 minutes
+      .cookie('refreshToken', refreshToken, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 30 * 24 * 60 * 60 * 1000 }) // 30 days
       .status(201)
       .json({ user: { id: user._id, name: user.name, email: user.email, role: user.role } })
   } catch (err) {
@@ -29,8 +29,8 @@ export async function signIn(req: Request, res: Response) {
     const { accessToken, refreshToken } = authService.generateTokens(user);
 
     res
-      .cookie('accessToken', accessToken, { httpOnly: true, secure: true, maxAge: 15 * 60 * 1000 })
-      .cookie('refreshToken', refreshToken, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 })
+      .cookie('accessToken', accessToken, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 15 * 60 * 1000 })
+      .cookie('refreshToken', refreshToken, { httpOnly: true, secure: true, sameSite: 'strict', maxAge: 30 * 24 * 60 * 60 * 1000 })
       .json({ user: { id: user._id, name: user.name, email: user.email, role: user.role } });
   } catch (err) {
     res.status(401).json({ message: (err as Error).message });

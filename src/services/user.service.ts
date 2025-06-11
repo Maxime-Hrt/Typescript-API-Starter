@@ -9,7 +9,6 @@ export async function getUserById(id: string): Promise<User | null> {
     const cachedUser = await redisClient.get(`user:${id}`)
     if (cachedUser) {
         const user = JSON.parse(cachedUser) as User
-        console.log("User found in cache")
         return user
     }
 

@@ -7,6 +7,7 @@ This is a starter project for a Typescript server using Express. The project is 
 1. Clone the repository
 2. Run `npm install` to install the dependencies
 3. Run `npm run dev` to start the server
+4. Build the docker image with `docker build --no-cache -t starter-typescript-server:staging .`
 
 ## Prerequisites
 
